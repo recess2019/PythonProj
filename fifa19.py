@@ -30,13 +30,16 @@ print(df)
 #PLAYER CLUSTERING
 #by Nationality
 plt.figure(figsize=(10,30))
-sns.countplot(y = df.Nationality)
+sns.countplot(y = df.Nationality,palette="Set2")
+plt.ylabel("Nationality")
 #by Age
 plt.figure(figsize=(10,5))
 sns.countplot(x="Age", data=df)
+plt.xlabel("Ages")
 #by Positon
 plt.figure(figsize=(12,6))
 sns.countplot(x = df.Position)
+plt.xlabel("Playing Positions")
 
 #DREAM TEAM
 #weights
@@ -50,13 +53,13 @@ df['gk_Shot_Stopper'] = (b*df.Reactions + b*df.Composure+ a*df.SprintSpeed+ a*df
 df['gk_Sweeper'] = (b*df.Reactions + b*df.Composure + b*df.SprintSpeed + a*df.ShortPassing + a*df.LongPassing + b*df.Jumping + b*df.GKPositioning + b*df.GKDiving + d*df.GKReflexes + b*df.GKHandling + d*df.GKKicking + c*df.Vision)/(2*a + 4*b + 2*c + 1*d)
 
 plt.figure(figsize=(8,5))
-#Generate sequential daata and plot
+#Generate sequential data and plot
 sd1 =df.sort_values('gk_Shot_Stopper', ascending=False)[:5]
 x1 = np.array(list(sd1['Name']))
 y1 = np.array(list(sd1['gk_Shot_Stopper']))
+sns.barplot(x1, y1, palette= "colorblind")
+plt.ylabel("Shot Stopper Score")
 
-sns.barplot(x1, y1)
-plt.ylabel("Shot Stopping Score")
 #Plotting for a Sweeper
 plt.figure(figsize=(8,5))
 sd = df.sort_values('gk_Sweeper', ascending=False)[:5]
